@@ -1,7 +1,11 @@
 import { model } from 'mongoose'
 
 const schema = {
-  originalUrl: String,
+  originalUrl: {
+    type: String,
+    index: true,
+    unique: true
+  },
   shortUrl: {
       type: String,
       index: true,
