@@ -5,7 +5,7 @@
   "description": "An URL Shortener with Express + ES6",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -31,19 +31,18 @@
   },
   "babel": {
     "presets": [
-      "env",
-      {
-        "targets": {
-          "node": "current"
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
         }
-      }
+      ]
     ],
     "plugins": [
       "transform-object-rest-spread",
       "transform-class-properties"
     ]
-  },
-  "jest": {
-    "testEnvironment": "node"
   }
 }
