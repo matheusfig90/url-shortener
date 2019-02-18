@@ -3,7 +3,7 @@ import mockingoose from 'mockingoose'
 import app from '../../app'
 import { ShortenerService } from '../../services'
 
-beforeAll(() => {
+beforeEach(() => {
   mockingoose.resetAll()
 })
 
@@ -14,15 +14,15 @@ it('should generate a short url', async () => {
 
   await request(app)
     .post('/api/v1/generate')
-    .send({ url: 'https://www.google.com' })
+    .send({ url: 'https://www.google1.com' })
     .expect(200)
     .then(response => {
       expect(response.body.shortUrl).toEqual('123asd')
     })
 })
 
-it.skip('should recover an url by short url', async () => {
-  mockingoose.URL.toReturn({ originalUrl: 'https://twitter.com', shortUrl: 'foo' }, 'find')
+it('should recover an url by short url', async () => {
+  mockingoose.urls.toReturn({ originalUrl: 'https://twitter.com', shortUrl: 'foo' }, 'findOne')
 
   await request(app)
     .get('/api/v1/recover/foo')

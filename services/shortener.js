@@ -4,14 +4,21 @@ import shortid from 'shortid'
 class ShortenerService {
 
   findByShortUrl(shortUrl) {
-    return URL.findOne({ shortUrl: shortUrl }).exec()
+    return URL.findOne({ shortUrl: shortUrl })
   }
 
   findByOriginalUrl(url) {
-    return URL.findOne({ originalUrl: url }).exec()
+    return URL.findOne({ originalUrl: url })
   }
 
-  save(url) {
+  async save(url) {
+    const doc = await this.findByOriginalUrl(url)
+    if (doc != null) {
+      return new Promise((resolve, reject) => {
+        resolve(doc)
+      })
+    }
+
     return new URL({
       originalUrl: url,
       shortUrl: this.generateShortUrl()
